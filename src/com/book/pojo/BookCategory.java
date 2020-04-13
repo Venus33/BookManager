@@ -24,5 +24,9 @@ public class BookCategory {
 	public BookCategory() {
 		super();
 	}
+	public BookCategory(String category) {
+		super();
+		this.category = category;
+	}
 	
 }

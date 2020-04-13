@@ -1,4 +1,4 @@
-package com.book.service;
+package com.book.service.user;
 
 import org.apache.ibatis.session.SqlSession;
 

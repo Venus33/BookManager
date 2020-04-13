@@ -25,23 +25,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="bookInfo" javaType="BookInfo" autoMapping="true">
 		</association>
 	</resultMap>
-	
-	<!-- 更新购物车信息 -->
+	<!-- 更新购物车信息的sql元素 -->
 	<update id="updateOrders">
-	    update system_book_orders
-	     <set>
-	        <if test="count > 0">
-	           count=#{count},
-	        </if>
-	        <if test="curPrice > 0.0">
-	           curPrice=#{curPrice},
-	        </if>
-	     </set>
-	     <where>
-	        <if test="oid != null and oid != ''">
-	           and oid=#{oid}
-	        </if>
-	     </where>
+		update system_book_orders 
+		<set>
+			<if test="count>0">
+				count=#{count},
+			</if>
+			<if test="curPrice>0.0">
+				curPrice=#{curPrice}
+			</if>
+			<where>
+				<if test="oid!=null and oid!=''">
+					and oid=#{oid}
+				</if>
+			</where>
+		</set>
 	</update>
-	
 </mapper>

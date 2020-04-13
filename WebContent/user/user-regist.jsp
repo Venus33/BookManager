@@ -10,7 +10,11 @@
   <body>
     <div id="container">
     	<div id="header">
-    		<div id="tool-bar">&nbsp;&nbsp; 欢迎光临智远图书网， [<a href="user-login.html">请登录</a>]&nbsp;[<a href="user-regist.html">免费注册</a>]&nbsp;&nbsp;&nbsp;<a href="index.html">首页</a>&nbsp;|&nbsp;<a href="cart.html">购物车</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|&nbsp;<a href="#">帮助</a></div>
+    		<div id="tool-bar">&nbsp;&nbsp; 欢迎光临智远图书网，[
+    			<c:if test="${!empty bookUser }" var="res">${showUser }</c:if>
+    			<c:if test="${!res }"><a href="user-login.html">请登录</a></c:if>
+    		]&nbsp;[<a href="user-regist.html">免费注册</a>]&nbsp;&nbsp;&nbsp;<a href="index.html">首页</a>&nbsp;|&nbsp;<a href="${pageContext.request.contextPath}/OrdersController?op=showCar">购物车</a>&nbsp;|&nbsp;<a href="#">我的订单</a>&nbsp;|&nbsp;<a href="#">帮助</a>
+    		</div>
     		<h1>智远图书网-<span style="font-size: 48px; font-family: Arial; font-weight: lighter;">Book</span></h1>
     	</div>
     	<div id="main">

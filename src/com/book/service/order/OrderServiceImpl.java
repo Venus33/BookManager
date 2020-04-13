@@ -1,4 +1,4 @@
-package com.book.service;
+package com.book.service.order;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<BookOrders> findOrders(String userId) {
 		sqlSession = MybatisUtils.createSqlSession();
-		List<BookOrders> list = sqlSession.getMapper(BookOrdersMapper.class).getOrderList(userId);
+		List<BookOrders> solist = sqlSession.getMapper(BookOrdersMapper.class).getOrderList(userId);
 		MybatisUtils.closeSqlSession(sqlSession);
-		return list;
+		return solist;
 	}
 	@Override
 	public boolean updateOrders(String oid, int count, double curPrice) {

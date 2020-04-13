@@ -1,25 +1,24 @@
 package com.book.pojo;
 
 public class BookInfo {
-
-	private Integer id;
-	private String bookName;
-	private String author;
-	private Integer categoryId;
-	private String publisher;
-	private Double price;
-	private String photo;
-	private BookCategory bookCategory;
-	public BookCategory getBookCategory() {
-		return bookCategory;
+    private int id;
+    private String bookName;
+    private String author;
+    private int categoryId;
+    private String publisher;
+    private double price;
+    private String photo;
+    private BookCategory cate;       
+	public BookCategory getCate() {
+		return cate;
 	}
-	public void setBookCategory(BookCategory bookCategory) {
-		this.bookCategory = bookCategory;
+	public void setCate(BookCategory cate) {
+		this.cate = cate;
 	}
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getBookName() {
@@ -34,10 +33,10 @@ public class BookInfo {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Integer getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(Integer categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getPublisher() {
@@ -46,10 +45,10 @@ public class BookInfo {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public Double getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	public String getPhoto() {
@@ -58,8 +57,7 @@ public class BookInfo {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public BookInfo(Integer id, String bookName, String author, Integer categoryId, String publisher, Double price,
-			String photo) {
+	public BookInfo(int id, String bookName, String author, int categoryId, String publisher, double price, String photo) {
 		super();
 		this.id = id;
 		this.bookName = bookName;
@@ -71,6 +69,15 @@ public class BookInfo {
 	}
 	public BookInfo() {
 		super();
-	} 
+	}
+	public BookInfo(String bookName, String author, int categoryId, String publisher, double price, String photo) {
+		super();
+		this.bookName = bookName;
+		this.author = author;
+		this.categoryId = categoryId;
+		this.publisher = publisher;
+		this.price = price;
+		this.photo = photo;
 	
+}
 }

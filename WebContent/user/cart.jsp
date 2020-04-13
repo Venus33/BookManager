@@ -22,13 +22,9 @@
     			<div class="box-left">
     				<div class="box-title">分类畅销榜</div>
     				<div class="box-content">
-    					<p>·<a href="#">文学</a></p>
-    					<p>·<a href="#">小说</a></p>
-    					<p>·<a href="#">青春文学</a></p>
-    					<p>·<a href="#">旅游</a></p>
-    					<p>·<a href="#">哲学</a></p>
-    					<p>·<a href="#">百科</a></p>
-    					<p>·<a href="#">恐怖小说</a></p>    		
+    					<c:forEach items="${list }" var="category">
+						<p>·<a href="#">${category.category}</a></p> 					
+    				</c:forEach>   		
     				</div>
     			</div>
     		</div>
@@ -42,7 +38,7 @@
     					<td class="header"  width="100">购物数量</td>
     					<td class="header"  width="60">小计</td>
     				</tr>
-    				<c:forEach items="${list }" var="o">
+    				<c:forEach items="${solist }" var="o">
     					<tr class="calcTr">
     						<td>${o.oid }</td>
 	    					<td>${o.bookInfo.bookName }</td>
@@ -62,21 +58,21 @@
     		<div class="cf"></div>   	
     	</div>  	
 		<div id="footer"><p>版权所有&copy;智远教育</p></div>
+	</div>
+  </body>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.4.1.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				calc();
 			});
 			
-			function calc(){
+			function calc() {
 				var totalPrice = 0;
-				//遍历所有tr中有calaTr的类样式，并将所有 的小计进行累加
 				$(".calcTr").each(function(){
 					totalPrice += parseFloat($(this).find("td").eq(4).text().substring(1));
 				});
 				$("#showTotal").text(totalPrice);
 			}
-			
 			function add(obj) {
 				// 获得需要修改的值
 				var count = $(obj).prev().val();
@@ -85,48 +81,45 @@
 				// 获得更新的订单号
 				var oid = $(obj).parents("tr").find("td").eq(0).text();
 				var price = parseFloat($(obj).parents("tr").find("td").eq(2).text().substring(1));
-				alert(oid+","+price);
 				// 使用ajax去实现数据的更新
 				$.post("${pageContext.request.contextPath}/OrdersController?op=update",
 						{oid:oid,count:count,price:price},function(res){
 					if(res.result=="true"){
-						alert("更新成功");
-					}else{
-						alert("更新失败");
+						alert("更新成功")
 					}
-				      location.href="${pageContext.request.contextPath}/OrdersController?op=showCar";
-				      //window.location.reload();
-				      calc();
+					else{
+						alert("更新失败")
+					}
+					location.href="${pageContext.request.contextPath}/OrdersController?op=showCar";
+					//window.location.reload();
+					calc();
 				});
 			}
-			
 			function jian(obj) {
 				// 获得需要修改的值
 				var count = $(obj).next().val();
 				count--;
-				if(count <= 0){
-					alert("数量不能为0!");
+				if(count<=0){
+					alert("数量不能为0");
 					return;
 				}
 				$(obj).next().val(count);
 				// 获得更新的订单号
 				var oid = $(obj).parents("tr").find("td").eq(0).text();
-				var price = parseFl($(obj).parents("tr").find("td").eq(2).text().substring(1));
-				alert(oid-","-price);
+				var price = parseFloat($(obj).parents("tr").find("td").eq(2).text().substring(1));
 				// 使用ajax去实现数据的更新
 				$.post("${pageContext.request.contextPath}/OrdersController?op=update",
 						{oid:oid,count:count,price:price},function(res){
 					if(res.result=="true"){
-						alert("更新成功");
-					}else{
-						alert("更新失败");
+						alert("更新成功")
 					}
-				      location.href="${pageContext.request.contextPath}/OrdersController?op=showCar";
-				      //window.location.reload();
-				      calc();
+					else{
+						alert("更新失败")
+					}
+					location.href="${pageContext.request.contextPath}/OrdersController?op=showCar";
+					//window.location.reload();
+					calc();
 				});
 			}
 		</script>
-	</div>
-  </body>
 </html>

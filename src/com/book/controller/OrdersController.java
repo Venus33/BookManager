@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.book.pojo.BookOrders;
-import com.book.service.OrderService;
-import com.book.service.OrderServiceImpl;
+import com.book.service.order.OrderService;
+import com.book.service.order.OrderServiceImpl;
 
 /**
  * Servlet implementation class OrdersController
@@ -47,15 +47,14 @@ public class OrdersController extends HttpServlet {
 	}
 
 	private void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.setContentType("application/json;charset=UTF-8");
 		String oid = request.getParameter("oid");
 		int count = Integer.parseInt(request.getParameter("count"));
 		double price = Double.parseDouble(request.getParameter("price"));
 		double curPrice = price*count;
 		// 调用业务层更新订单的方法
+		boolean isok=os.updateOrders(oid,count,curPrice);
 		PrintWriter pw = response.getWriter();
-		boolean isOk = os.updateOrders(oid,count,curPrice);
-		if(isOk) {
+		if(isok) {
 			pw.write("{\"result\":\"true\"}");
 		}else {
 			pw.write("{\"result\":\"false\"}");
@@ -67,8 +66,8 @@ public class OrdersController extends HttpServlet {
 	private void showOrderList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 获得userId
 		String userId = (String) request.getSession().getAttribute("showUser");
-		List<BookOrders> list = os.findOrders(userId);
-		request.getSession().setAttribute("list", list);
+		List<BookOrders> solist = os.findOrders(userId);
+		request.getSession().setAttribute("solist", solist);
 		response.sendRedirect("user/cart.jsp");
 	}
 
@@ -84,7 +83,7 @@ public class OrdersController extends HttpServlet {
 		String orderId = sdf.format(date);
 		int rand = (int)(Math.random()*(999999-100000+1)+100000);
 		orderId += rand;
-		System.out.println("生成的订单id是："+orderId);
+		
 		// 获得用户的账户
 		String userId = (String) request.getSession().getAttribute("showUser");
 		BookOrders order = new BookOrders(orderId, id, 1, price, date, userId);

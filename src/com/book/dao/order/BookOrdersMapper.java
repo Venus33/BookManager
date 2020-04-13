@@ -17,5 +17,5 @@ public interface BookOrdersMapper {
 	
 	List<BookOrders> getOrderList(@Param("uid") String uid);
 
-	int updateOrders(@Param("oid") String oid,@Param("count")  int count,@Param("curPrice")  double curPrice);
+	int updateOrders(@Param("oid")String oid, @Param("count")int count,@Param("curPrice") double curPrice);
 }
